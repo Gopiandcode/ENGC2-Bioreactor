@@ -77,7 +77,7 @@ void readTemperaturePort() {
     print("END \n");
     //DEBUG
     if (processedData[0].equals("b")) {
-      for (int i = 1; i< min(temperatureData.length, processedData.length); i++) temperatureData[i] = float(processedData[i]);
+      for (int i = 0; i< min(temperatureData.length, processedData.length); i++) temperatureData[i] = float(processedData[i]);
       //DEBUG
       print("Processed:");
       for (float value : temperatureData) print(" " + value  + " ");
