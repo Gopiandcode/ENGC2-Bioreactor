@@ -3,7 +3,6 @@ float temp_set = 30;
 int on = 1;
 int off = 0;
 int output;
-
 int sending_time;
 
 
