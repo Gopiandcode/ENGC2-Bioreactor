@@ -9,7 +9,7 @@ FloatList temperatureGraphingData = new FloatList();
 int pHPumpOn = 0, heaterOn = 0;
 
 void updateGraphs() {
-  if (!Float.isNaN(pHData[1]) && pHData[1] < 7) {pHGraphingData.append(pHData[1]);}
+  if (!Float.isNaN(pHData[0]) && pHData[0] < 7) {pHGraphingData.append(pHData[0]);}
   if (pHGraphingData.size() > 30) pHGraphingData.remove(0);
   if(!Float.isNaN(motorData[0])) motorGraphingData.append(motorData[0]);
   if (motorGraphingData.size() > 30) motorGraphingData.remove(0);
@@ -63,9 +63,9 @@ void drawGraphs() {
   if(pHPumpOn == 0) {fill(#3146a0);rect(128, 400, 170, 30);fill(#ffffff);text("Pump off", 183, 420);}
   if(heaterOn == 1) {fill(#f20430);rect(981, 400, 170, 30);fill(#ffffff);text("Heater on", 1036, 420);}
   if(heaterOn == 0) {fill(#3146a0);rect(981, 400, 170, 30);fill(#ffffff);text("Heater off", 1036, 420);} 
-  fill(#ffffff); text("Current temp: " + temperatureGraphingData.get(temperatureGraphingData.size()-1) + "*c", 1016, 390);
-  fill(#ffffff); text("Current RPM: " + motorGraphingData.get(motorGraphingData.size()-1) + "RPM", 585, 390);
-  fill(#ffffff); text("Current pH: " + pHGraphingData.get(pHGraphingData.size()-1), 138, 390);
+  fill(#ffffff); if(temperatureGraphingData.size()-1 >= 0)text("Current temp: " + temperatureGraphingData.get(temperatureGraphingData.size()-1) + "*c", 1016, 390);
+  fill(#ffffff); if(motorGraphingData.size()-1 >= 0)text("Current RPM: " + motorGraphingData.get(motorGraphingData.size()-1) + "RPM", 585, 390);
+  fill(#ffffff); if(pHGraphingData.size()-1 >= 0) text("Current pH: " + pHGraphingData.get(pHGraphingData.size()-1), 138, 390);
   
   return;
 }

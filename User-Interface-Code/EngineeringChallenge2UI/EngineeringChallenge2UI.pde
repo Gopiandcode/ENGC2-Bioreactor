@@ -23,14 +23,15 @@ void setup() {
   //setupPorts(0, 0, 0);
   setupGraphs();
   startTime = millis();
-  singlePort(0);
+  //singlePort(1);
+  doublePort(1,0);
   setupUI();
 }
 
 void draw() {
   background(0);
   readpHPort();
-  //readTemperaturePort();
+  readTemperaturePort();
   //readMotorPort();
   updateGraphs();
   drawGraphs(); startTime = millis();

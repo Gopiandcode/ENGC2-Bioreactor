@@ -46,11 +46,12 @@ void readpHPort() {
 
     //DEBUG 
     //print("Recieved:");
-    //for (String data : processedData) print(" " + data  + " " + ( data.equals("b") || data.equals("e")));
+    //for (String data : processedData) print(" " + data  + " ");
     //print("END \n");
     //DEBUG 
     if (processedData[0].equals("b")) {
-      for (int i = 0; i< min(processedData.length, pHData.length); i++) pHData[i] = float(processedData[i]);
+      for (int i = 1; i< min(processedData.length, pHData.length)+1; i++) pHData[i-1] = float(processedData[i]);
+    }
       //DEBUG
       //print("Processed:");
       //for (float value : pHData) print(" " + value  + " ");
@@ -67,21 +68,23 @@ void readpHPort() {
 void readTemperaturePort() {
   String rawRecievedData;
   String[] processedData;
-  if (temperaturePort.available() > 20) {
+  //print("Read Temp port called with " + temperaturePort.available() + "\n");
+  if (temperaturePort.available() > 10) {
     rawRecievedData = temperaturePort.readStringUntil('\n');
     processedData = rawRecievedData.split(" ");
     
     //DEBUG
-    print("Recieved:");
-    for (String data : processedData) print(" " + data  + " ");
-    print("END \n");
+    //print("Recieved:");
+    //for (String data : processedData) print(" " + data  + " ");
+    //print("END \n");
     //DEBUG
     if (processedData[0].equals("b")) {
-      for (int i = 0; i< min(temperatureData.length, processedData.length); i++) temperatureData[i] = float(processedData[i]);
+      for (int i = 1; i< min(temperatureData.length, processedData.length)+1; i++) temperatureData[i-1] = float(processedData[i]);
+      if(temperatureData.length > 1) {heaterOn = int(temperatureData[1]);}
       //DEBUG
-      print("Processed:");
-      for (float value : temperatureData) print(" " + value  + " ");
-      print("END \n");
+      //print("Processed:");
+      //for (float value : temperatureData) print(" " + value  + " ");
+      //print("END \n");
     }
     //DEBUG
     recievedData = true;
