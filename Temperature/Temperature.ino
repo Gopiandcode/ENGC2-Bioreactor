@@ -31,17 +31,16 @@ void loop()
   if (temp < temp_set - 0.5)
   {
     digitalWrite(P1_6,HIGH); // P1_5 is heater
-    Serial.println(on);
+    //Serial.println(on);
     output = on;
-   //delay(5000);
+    delay(5000);
   }
   else if (temp > temp_set +0.5)
   {
     digitalWrite(P1_6,LOW);
-    Serial.println(off);
+    //Serial.println(off);
     output = off;
-   
-    //delay(5000);
+    delay(5000);
   }
   
   if (mil - sending_time >= 100)
@@ -54,8 +53,7 @@ void loop()
     Serial.print ("\n");
     sending_time = millis();
   }
-  delay(500);
- }
+}
  
 // convert ADC values to Celcius
 
