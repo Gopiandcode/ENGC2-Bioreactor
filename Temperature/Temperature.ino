@@ -1,7 +1,10 @@
 #include <math.h>
-float temp_set;
+float temp_set = 30;
 int on = 1;
 int off = 0;
+int output;
+
+int sending_time;
 
 
 void setup()
@@ -9,6 +12,7 @@ void setup()
   Serial.begin(9600);
   pinMode(P1_4,INPUT_PULLUP);
   pinMode(P1_6,OUTPUT);
+  sending_time = millis();
 input:
   Serial.println("Enter ideal temperature value between 25-35");
   while(Serial.available() == 0) {}
@@ -24,27 +28,32 @@ input:
 void loop()
 {
   float temp= Thermistor(analogRead(P1_4)); // P1_4 is thermistor
- 
+  unsigned long mil = millis();
   if (temp < temp_set - 0.5)
   {
     digitalWrite(P1_6,HIGH); // P1_5 is heater
-    Serial.print("The temperature value is ");
-    Serial.print(temp);
-    Serial.print("\n");
-    Serial.print(on) // heater is on
-    Serial.print("\r\n");
-    
-    //delay(5000);
+    Serial.println(on);
+    output = on;
+   //delay(5000);
   }
   else if (temp > temp_set +0.5)
   {
     digitalWrite(P1_6,LOW);
-    Serial.print("The temperature value is ");
-    Serial.print(temp);
-    Serial.print("\n");
-    Serial.print(off) // heater is on
-    Serial.print("\r\n");
+    Serial.println(off);
+    output = off;
+   
     //delay(5000);
+  }
+  
+  if (mil - sending_time >= 100)
+  {
+    Serial.print ("b ");
+    Serial.print (temp);
+    Serial.print (" ");
+    Serial.print (output);
+    Serial.print (" ");
+    Serial.print ("\n");
+    sending_time = millis();
   }
   delay(500);
  }
