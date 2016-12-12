@@ -60,7 +60,7 @@ void readpHPort() {
     //DEBUG
     recievedData = true;
     phProbePort.clear();
-  }
+  
   return;
 }
 
@@ -106,7 +106,7 @@ void readMotorPort() {
     //print("END \n");
     //DEBUG
     if(processedData[0].equals("b")){
-      for (int i = 0; i< min(processedData.length, motorData.length); i++) motorData[i] = float(processedData[i]);
+      for (int i = 1; i< min(processedData.length, motorData.length)+1; i++) motorData[i-1] = float(processedData[i]);
     //DEBUG
     //print("Processed:");
     //for (float value : motorData) print(" " + value  + " ");

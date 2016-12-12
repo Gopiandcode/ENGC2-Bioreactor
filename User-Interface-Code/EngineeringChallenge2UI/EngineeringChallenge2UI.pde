@@ -23,16 +23,16 @@ void setup() {
   //setupPorts(0, 0, 0);
   setupGraphs();
   startTime = millis();
-  //singlePort(1);
-  doublePort(1,0);
+  singlePort(0, 0);                    // 0 for motor, 1 for temperature, 2 for pH
+  //doublePort(1,0);
   setupUI();
 }
 
 void draw() {
   background(0);
-  readpHPort();
-  readTemperaturePort();
-  //readMotorPort();
+  //readpHPort();
+  //readTemperaturePort();
+  readMotorPort();
   updateGraphs();
   drawGraphs(); startTime = millis();
   sendTarget();
